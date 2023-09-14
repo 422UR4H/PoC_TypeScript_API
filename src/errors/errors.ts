@@ -8,6 +8,13 @@ function badRequest(message: string = "entity is not valid"): CustomError {
         status: httpStatus.BAD_REQUEST
     };
 }
+function unauthorized(entity?: string): CustomError {
+    return {
+        name: "unauthorized",
+        message: !!entity ? `incorrect ${entity}` : "access denied!",
+        status: httpStatus.UNAUTHORIZED
+    };
+}
 function notFound(entity: string = "entity"): CustomError {
     return {
         name: "notFound",
@@ -47,6 +54,7 @@ function internalServerError(message: string = "internal server error"): CustomE
 }
 export const errors = {
     badRequest,
+    unauthorized,
     notFound,
     conflict,
     unprocessableEntity,

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import playerRouter from "@/routers/player.routes";
+import authRouter from "@/routers/auth.routes";
 
 const router = Router();
-router.use(playerRouter);
+router.use(authRouter);
 
 export default router;
