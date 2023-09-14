@@ -1,5 +1,9 @@
 import { clientDB } from "@/database/db.connection";
 import { Player } from "@/protocols/player.protocols";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 
 function create(player: Player) {
     const { nick, name, description, avatarUrl, birthday } = player;
@@ -8,7 +12,7 @@ function create(player: Player) {
         VALUES ($1, $2, $3, $4, $5)
         ON CONFLICT DO NOTHING
         RETURNING id;`,
-        [nick, name, description, avatarUrl, birthday]
+        [nick, name, description, avatarUrl, dayjs(birthday, "DD-MM-YYYY")]
     );
 }
 
