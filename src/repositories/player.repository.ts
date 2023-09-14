@@ -1,9 +1,6 @@
 import { clientDB } from "@/database/db.connection";
 import { CreatePlayer, Player } from "@/protocols/player.protocols";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-
-dayjs.extend(customParseFormat);
+import { Dayjs } from "dayjs";
 
 function create(player: CreatePlayer) {
     const { nick, name, email, password, description, avatarUrl, birthday } = player;
@@ -12,7 +9,7 @@ function create(player: CreatePlayer) {
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT DO NOTHING
         RETURNING id;`,
-        [nick, name, email, password, description, avatarUrl, dayjs(birthday, "DD-MM-YYYY")]
+        [nick, name, email, password, description, avatarUrl, birthday]
     );
 }
 
@@ -40,7 +37,20 @@ function readById(id: number) {
     );
 }
 
+function update(id: number, player: CreatePlayer, updatedAd: Dayjs) {
+    const { nick, name, email, password, description, avatarUrl, birthday } = player;
+    return clientDB.query<Player>(`
+        UPDATE players
+        SET nick = $1, name = $2, email = $3, password = $4, description = $5,
+            "avatarUrl" = $6, birthday = $7, "updatedAt" = $8
+        WHERE id = $9
+        RETURNING *;`,
+        [nick, name, email, password, description, avatarUrl, birthday, updatedAd, id]
+    );
+}
+
 export const playerRepository = {
     create, readByEmail,
-    readByNick, readById
+    readByNick, readById,
+    update
 };

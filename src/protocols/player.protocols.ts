@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 export type Player = {
     id: number,
     nick: string,
@@ -6,9 +8,9 @@ export type Player = {
     password: string,
     avatarUrl: string,
     description: string,
-    birthday: Date,
-    createdAt: Date,
-    updatedAt: Date
+    birthday: Date | Dayjs,
+    createdAt: Date | Dayjs,
+    updatedAt: Date | Dayjs
 };
 
 export type CreatePlayer = Omit<Player, "id" | "createdAt" | "updatedAt">;

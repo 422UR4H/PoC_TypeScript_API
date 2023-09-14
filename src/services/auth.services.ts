@@ -1,13 +1,18 @@
 import { errors } from "@/errors/errors";
 import { CreatePlayer } from "@/protocols/player.protocols";
 import { playerRepository } from "@/repositories/player.repository";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs";
+
+dayjs.extend(customParseFormat);
 
 async function signUp(player: CreatePlayer): Promise<void> {
-    const { password } = player;
+    const { password, birthday } = player;
     const hash = bcrypt.hashSync(password, 10);
     player.password = hash;
+    player.birthday = dayjs(birthday, "DD-MM-YYYY");
 
     const result = await playerRepository.create(player);
     if (result.rowCount <= 0) throw errors.conflict("nick or email of player");
