@@ -6,13 +6,13 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 function create(player: Player) {
-    const { nick, name, description, avatarUrl, birthday } = player;
+    const { nick, name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query(`
-        INSERT INTO players (nick, name, description, "avatarUrl", birthday)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO players (nick, name, email, password, description, "avatarUrl", birthday)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT DO NOTHING
         RETURNING id;`,
-        [nick, name, description, avatarUrl, dayjs(birthday, "DD-MM-YYYY")]
+        [nick, name, email, password, description, avatarUrl, dayjs(birthday, "DD-MM-YYYY")]
     );
 }
 
