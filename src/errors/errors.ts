@@ -2,32 +2,33 @@ import { CustomError } from "@/protocols/customError.protocols";
 import httpStatus from "http-status";
 
 function badRequest(message: string = "entity is not valid"): CustomError {
-    return {
-        name: "badRequest",
+    return new CustomError(
+        "badRequest",
         message,
-        status: httpStatus.BAD_REQUEST
-    };
+        httpStatus.BAD_REQUEST
+    );
 }
 function unauthorized(entity?: string): CustomError {
-    return {
-        name: "unauthorized",
-        message: !!entity ? `incorrect ${entity}` : "access denied!",
-        status: httpStatus.UNAUTHORIZED
-    };
+    const message = !!entity ? `incorrect ${entity}` : "access denied!";
+    return new CustomError(
+        "unauthorized",
+        message,
+        httpStatus.UNAUTHORIZED
+    );
 }
 function notFound(entity: string = "entity"): CustomError {
-    return {
-        name: "notFound",
-        message: `${entity} does not exist`,
-        status: httpStatus.NOT_FOUND
-    };
+    return new CustomError(
+        "notFound",
+        `${entity} does not exist`,
+        httpStatus.NOT_FOUND
+    );
 }
 function conflict(entity: string = "entity"): CustomError {
-    return {
-        name: "conflict",
-        message: `${entity} already exists`,
-        status: httpStatus.CONFLICT
-    };
+    return new CustomError(
+        "conflict",
+        `${entity} already exists`,
+        httpStatus.CONFLICT
+    );
 }
 function unprocessableEntity(entity?: string | Array<string>): CustomError {
     let message: string;
@@ -39,18 +40,18 @@ function unprocessableEntity(entity?: string | Array<string>): CustomError {
     } else {
         message = entity.join("\n");
     }
-    return {
-        name: "unprocessableEntity",
+    return new CustomError(
+        "unprocessableEntity",
         message,
-        status: httpStatus.UNPROCESSABLE_ENTITY
-    };
+        httpStatus.UNPROCESSABLE_ENTITY
+    );
 }
 function internalServerError(message: string = "internal server error"): CustomError {
-    return {
-        name: "internalServerError",
+    return new CustomError(
+        "internalServerError",
         message,
-        status: httpStatus.INTERNAL_SERVER_ERROR
-    };
+        httpStatus.INTERNAL_SERVER_ERROR
+    );
 }
 const errors = {
     badRequest,
