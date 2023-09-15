@@ -13,4 +13,6 @@ export type Player = {
     updatedAt: Date | Dayjs
 };
 
-export type CreatePlayer = Omit<Player, "id" | "createdAt" | "updatedAt">;
+type SystemProperties = "id" | "createdAt" | "updatedAt";
+export type CreatePlayer = Omit<Player, SystemProperties>;
+export type UpdatePlayer = Omit<Player, SystemProperties | "nick">;

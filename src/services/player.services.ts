@@ -10,6 +10,10 @@ function update(id: number, player: CreatePlayer) {
     return playerRepository.update(id, player, dayjs());
 }
 
+function deleteById(id: number) {
+    return playerRepository.deleteById(id);
+}
+
 export const playerService = {
-    update
+    update, deleteById
 }
