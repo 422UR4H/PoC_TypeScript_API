@@ -10,6 +10,8 @@ dayjs.extend(customParseFormat);
 
 export async function signUp(player: CreatePlayer): Promise<void> {
     const { password, birthday } = player;
+    if (typeof password !== "string") throw errors.unprocessableEntity("password");
+
     const hash = bcrypt.hashSync(password, 10);
     player.password = hash;
     player.birthday = dayjs(birthday, "DD-MM-YYYY");
@@ -23,10 +25,10 @@ export async function signIn(email: string, password: string): Promise<any> {
     if (result.rowCount <= 0) throw errors.notFound("email");
 
     const player = result.rows[0];
+    if (typeof player.password !== "string") throw errors.internalServerError();
     if (!bcrypt.compareSync(password, player.password)) {
         throw errors.unauthorized("password");
     }
-
     const token = jwt.sign(
         { id: player.id },
         process.env.JWT_SECRET || process.env.SECRET_KEY || "test",
