@@ -53,7 +53,7 @@ export function internalServerError(message: string = "internal server error"): 
         httpStatus.INTERNAL_SERVER_ERROR
     );
 }
-const errors = {
+const customErrors = {
     badRequest,
     unauthorized,
     notFound,
@@ -61,4 +61,4 @@ const errors = {
     unprocessableEntity,
     internalServerError
 };
-export default errors;
+export default customErrors;
