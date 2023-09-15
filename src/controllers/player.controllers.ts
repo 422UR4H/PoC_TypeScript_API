@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreatePlayer } from "@/protocols/player.protocols";
 import playerService from "@/services/player.services";
-import errors from "@/errors/errors";
+import errors from "@/errors/customErrors";
 
 export async function update(req: Request, res: Response): Promise<void> {
     const id = Number(req.params.id);

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { internalServerError } from "@/errors/errors";
+import { internalServerError } from "@/errors/customErrors";
 import { CustomError } from "@/protocols/customError.protocols";
 
 export default function errorHandler(err: CustomError, req: Request, res: Response, next: NextFunction) {

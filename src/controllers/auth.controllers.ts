@@ -3,7 +3,7 @@ import { CreatePlayer } from "@/protocols/player.protocols";
 import { Auth } from "@/protocols/auth.protocols";
 import authService from "@/services/auth.services";
 import httpStatus from "http-status";
-import errors from "@/errors/errors";
+import errors from "@/errors/customErrors";
 
 export async function signUp(req: Request, res: Response): Promise<void> {
     const player = req.body as CreatePlayer;

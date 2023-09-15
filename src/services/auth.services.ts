@@ -1,6 +1,6 @@
 import { CreatePlayer } from "@/protocols/player.protocols";
 import playerRepository from "@/repositories/player.repository";
-import errors from "@/errors/errors";
+import errors from "@/errors/customErrors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dayjs from "dayjs";
