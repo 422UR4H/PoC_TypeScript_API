@@ -52,7 +52,7 @@ function internalServerError(message: string = "internal server error"): CustomE
         status: httpStatus.INTERNAL_SERVER_ERROR
     };
 }
-export const errors = {
+const errors = {
     badRequest,
     unauthorized,
     notFound,
@@ -60,3 +60,4 @@ export const errors = {
     unprocessableEntity,
     internalServerError
 };
+export default errors;

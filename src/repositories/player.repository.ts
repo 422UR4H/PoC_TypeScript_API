@@ -9,7 +9,7 @@ function create(player: CreatePlayer) {
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT DO NOTHING
         RETURNING id;`,
-        [nick, name, email, password, description, avatarUrl, birthday]
+        [nick, name, email, password, description, avatarUrl, birthday, "DD-MM-YYYY"]
     );
 }
 

@@ -1,7 +1,7 @@
 import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import { errors } from "@/errors/errors";
+import errors from "@/errors/errors";
 import { playerRepository } from "@/repositories/player.repository";
 
 dotenv.config();

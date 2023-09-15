@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { CreatePlayer } from "@/protocols/player.protocols";
 import { authService } from "@/services/auth.services";
 import { Auth } from "@/protocols/auth.protocols";
-import { errors } from "@/errors/errors";
+import errors from "@/errors/errors";
 import httpStatus from "http-status";
 
 

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { playerService } from "@/services/player.services";
 import { CreatePlayer } from "@/protocols/player.protocols";
-import { errors } from "@/errors/errors";
+import errors from "@/errors/errors";
 
 
 async function update(req: Request, res: Response): Promise<void> {
