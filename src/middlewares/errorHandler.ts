@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { internalServerError } from "@/errors/customErrors";
+import customErrors from "@/errors/customErrors";
 import { CustomError } from "@/protocols/customError.protocols";
 
 export default function errorHandler(err: CustomError, req: Request, res: Response, next: NextFunction) {
     if (!!err.status) return res.status(err.status).send(err.message);
-    res.status(internalServerError().status).send(internalServerError().message);
+    res.status(customErrors.internalServerError().status).send(customErrors.internalServerError().message);
 }
