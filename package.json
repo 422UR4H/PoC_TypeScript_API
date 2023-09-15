@@ -18,8 +18,7 @@
     "@types/pg": "^8.10.2",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.2.2"
+    "tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
     "@joi/date": "^2.1.0",
@@ -31,6 +30,7 @@
     "http-status": "^1.7.0",
     "joi": "^17.10.1",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "typescript": "^5.2.2"
   }
 }
