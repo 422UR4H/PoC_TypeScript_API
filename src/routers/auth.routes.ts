@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { authSchema } from "@/schemas/auth.schemas";
 import { playerSchema } from "@/schemas/player.schemas";
-import { authController } from "@/controllers/auth.controllers";
 import validateSchema from "@/middlewares/validateSchema";
+import authController from "@/controllers/auth.controllers";
 
 const router = Router();
 

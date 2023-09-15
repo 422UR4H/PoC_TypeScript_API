@@ -1,9 +1,9 @@
-import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
-import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import errors from "@/errors/errors";
-import { playerRepository } from "@/repositories/player.repository";
+import jwt, { JwtPayload, VerifyErrors } from "jsonwebtoken";
+import playerRepository from "@/repositories/player.repository";
 import httpStatus from "http-status";
+import errors from "@/errors/errors";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -18,13 +18,13 @@ export default function validateAuth(req: Request, res: Response, next: NextFunc
             if (error) return res.status(httpStatus.UNAUTHORIZED).send("token is not valid");
 
             const user = (await playerRepository.readById(decoded.id))?.rows[0];
-            if (!user) return errors.notFound("player");
+            if (!user) return res.status(httpStatus.NOT_FOUND).send("player does not exist");
 
             delete user.password;
             res.locals.user = user;
             return next();
         });
     } catch (err) {
-        errors.internalServerError(err.message);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     }
 }

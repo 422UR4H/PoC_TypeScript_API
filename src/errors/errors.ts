@@ -1,14 +1,14 @@
 import { CustomError } from "@/protocols/customError.protocols";
 import httpStatus from "http-status";
 
-function badRequest(message: string = "entity is not valid"): CustomError {
+export function badRequest(message: string = "entity is not valid"): CustomError {
     return new CustomError(
         "badRequest",
         message,
         httpStatus.BAD_REQUEST
     );
 }
-function unauthorized(entity?: string): CustomError {
+export function unauthorized(entity?: string): CustomError {
     const message = !!entity ? `incorrect ${entity}` : "access denied!";
     return new CustomError(
         "unauthorized",
@@ -16,21 +16,21 @@ function unauthorized(entity?: string): CustomError {
         httpStatus.UNAUTHORIZED
     );
 }
-function notFound(entity: string = "entity"): CustomError {
+export function notFound(entity: string = "entity"): CustomError {
     return new CustomError(
         "notFound",
         `${entity} does not exist`,
         httpStatus.NOT_FOUND
     );
 }
-function conflict(entity: string = "entity"): CustomError {
+export function conflict(entity: string = "entity"): CustomError {
     return new CustomError(
         "conflict",
         `${entity} already exists`,
         httpStatus.CONFLICT
     );
 }
-function unprocessableEntity(entity?: string | Array<string>): CustomError {
+export function unprocessableEntity(entity?: string | Array<string>): CustomError {
     let message: string;
 
     if (entity == null) {
@@ -46,7 +46,7 @@ function unprocessableEntity(entity?: string | Array<string>): CustomError {
         httpStatus.UNPROCESSABLE_ENTITY
     );
 }
-function internalServerError(message: string = "internal server error"): CustomError {
+export function internalServerError(message: string = "internal server error"): CustomError {
     return new CustomError(
         "internalServerError",
         message,

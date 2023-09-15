@@ -1,6 +1,6 @@
+import { CreatePlayer, UpdatePlayer } from "@/protocols/player.protocols";
 import JoiBase, { Root } from "joi";
 import JoiDate from "@joi/date";
-import { CreatePlayer, UpdatePlayer } from "@/protocols/player.protocols";
 
 const Joi = JoiBase.extend(JoiDate) as Root;
 

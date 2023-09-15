@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { playerSchema } from "@/schemas/player.schemas";
-import { playerController } from "@/controllers/player.controllers";
-import validateSchema from "@/middlewares/validateSchema";
 import validateAuth from "@/middlewares/validateAuth";
+import { playerSchema } from "@/schemas/player.schemas";
+import validateSchema from "@/middlewares/validateSchema";
+import playerController from "@/controllers/player.controllers";
 
 const router = Router();
 

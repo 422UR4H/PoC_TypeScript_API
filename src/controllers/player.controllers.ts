@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
-import { playerService } from "@/services/player.services";
 import { CreatePlayer } from "@/protocols/player.protocols";
+import playerService from "@/services/player.services";
 import errors from "@/errors/errors";
-import httpStatus from "http-status";
 
-
-async function update(req: Request, res: Response): Promise<void> {
+export async function update(req: Request, res: Response): Promise<void> {
     const id = Number(req.params.id);
     if (!id) throw errors.unprocessableEntity("id");
 
@@ -18,7 +16,7 @@ async function update(req: Request, res: Response): Promise<void> {
     res.send(result.rows[0]);
 }
 
-async function deleteById(req: Request, res: Response): Promise<void> {
+export async function deleteById(req: Request, res: Response): Promise<void> {
     const id = Number(req.params.id);
     if (!id || id < 1) throw errors.badRequest("id is not valid");
 
@@ -27,10 +25,10 @@ async function deleteById(req: Request, res: Response): Promise<void> {
     const result = await playerService.deleteById(id);
     if (result.rowCount <= 0) throw errors.notFound("player");
 
-    console.log(result.rows[0])
     res.send(result.rows[0]);
 }
 
-export const playerController = {
+const playerController = {
     update, deleteById
 }
+export default playerController;

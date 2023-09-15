@@ -2,7 +2,7 @@ import { clientDB } from "@/database/db.connection";
 import { CreatePlayer, Player } from "@/protocols/player.protocols";
 import { Dayjs } from "dayjs";
 
-function create(player: CreatePlayer) {
+export function create(player: CreatePlayer) {
     const { nick, name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query<Number>(`
         INSERT INTO players (nick, name, email, password, description, "avatarUrl", birthday)
@@ -13,7 +13,7 @@ function create(player: CreatePlayer) {
     );
 }
 
-function readByEmail(email: string) {
+export function readByEmail(email: string) {
     return clientDB.query<Player>(`
         SELECT * FROM players
         WHERE email = $1;`,
@@ -21,7 +21,7 @@ function readByEmail(email: string) {
     );
 }
 
-function readByNick(nick: string) {
+export function readByNick(nick: string) {
     return clientDB.query<Player>(`
         SELECT * FROM players
         WHERE nick = $1;`,
@@ -29,7 +29,7 @@ function readByNick(nick: string) {
     );
 }
 
-function readById(id: number) {
+export function readById(id: number) {
     return clientDB.query<Player>(`
         SELECT * FROM players
         WHERE id = $1;`,
@@ -37,7 +37,7 @@ function readById(id: number) {
     );
 }
 
-function update(id: number, player: CreatePlayer, updatedAd: Dayjs) {
+export function update(id: number, player: CreatePlayer, updatedAd: Dayjs) {
     const { nick, name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query<Player>(`
         UPDATE players
@@ -54,7 +54,7 @@ function update(id: number, player: CreatePlayer, updatedAd: Dayjs) {
     );
 }
 
-function deleteById(id: number) {
+export function deleteById(id: number) {
     return clientDB.query<Player>(`
         DELETE FROM players
         WHERE id = $1
@@ -63,8 +63,9 @@ function deleteById(id: number) {
     );
 }
 
-export const playerRepository = {
+const playerRepository = {
     create, readByEmail,
     readByNick, readById,
     update, deleteById
 };
+export default playerRepository;
