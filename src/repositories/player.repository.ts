@@ -1,5 +1,5 @@
 import { clientDB } from "@/database/db.connection";
-import { CreatePlayer, Player } from "@/protocols/player.protocols";
+import { Player, CreatePlayer, UpdatePlayer } from "@/protocols/player.protocols";
 import { Dayjs } from "dayjs";
 
 export function create(player: CreatePlayer) {
@@ -37,8 +37,8 @@ export function readById(id: number) {
     );
 }
 
-export function update(id: number, player: CreatePlayer, updatedAd: Dayjs) {
-    const { nick, name, email, password, description, avatarUrl, birthday } = player;
+export function update(id: number, player: UpdatePlayer, updatedAd: Dayjs) {
+    const { name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query<Player>(`
         UPDATE players
             SET name = $2,

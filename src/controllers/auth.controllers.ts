@@ -8,7 +8,10 @@ import customErrors from "@/errors/customErrors";
 export async function signUp(req: Request, res: Response): Promise<void> {
     const player = req.body as CreatePlayer;
     if (!player) throw customErrors.unprocessableEntity("player");
-    await authService.signUp(player);
+
+    const result = await authService.signUp(player);
+    if (result.rowCount <= 0) throw customErrors.conflict("nick or email of player");
+
     res.sendStatus(httpStatus.CREATED);
 }
 

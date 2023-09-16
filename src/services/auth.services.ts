@@ -4,11 +4,11 @@ import customErrors from "@/errors/customErrors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
-export async function signUp(player: CreatePlayer): Promise<void> {
+export function signUp(player: CreatePlayer): Promise<any> {
     const { password, birthday } = player;
     if (typeof password !== "string") throw customErrors.unprocessableEntity("password");
 
@@ -16,8 +16,7 @@ export async function signUp(player: CreatePlayer): Promise<void> {
     player.password = hash;
     player.birthday = dayjs(birthday, "DD-MM-YYYY");
 
-    const result = await playerRepository.create(player);
-    if (result.rowCount <= 0) throw customErrors.conflict("nick or email of player");
+    return playerRepository.create(player);
 }
 
 export async function signIn(email: string, password: string): Promise<any> {
