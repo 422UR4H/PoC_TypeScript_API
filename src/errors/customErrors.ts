@@ -46,7 +46,8 @@ export function unprocessableEntity(entity?: string | Array<string>): CustomErro
         httpStatus.UNPROCESSABLE_ENTITY
     );
 }
-export function internalServerError(message: string = "internal server error"): CustomError {
+export function internalServerError(message: string | void): CustomError {
+    if (typeof message !== "string") message = "internal server error";
     return new CustomError(
         "internalServerError",
         message,

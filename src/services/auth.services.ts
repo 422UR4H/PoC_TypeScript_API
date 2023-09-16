@@ -10,8 +10,9 @@ dayjs.extend(customParseFormat);
 
 export function signUp(player: CreatePlayer): Promise<any> {
     const { password, birthday } = player;
-    if (typeof password !== "string") throw customErrors.unprocessableEntity("password");
-
+    if (typeof password !== "string") {
+        throw customErrors.unprocessableEntity("password");
+    }
     const hash = bcrypt.hashSync(password, 10);
     player.password = hash;
     player.birthday = dayjs(birthday, "DD-MM-YYYY");
@@ -24,7 +25,9 @@ export async function signIn(email: string, password: string): Promise<any> {
     if (result.rowCount <= 0) throw customErrors.notFound("email");
 
     const player = result.rows[0];
-    if (typeof player.password !== "string") throw customErrors.internalServerError();
+    if (typeof player.password !== "string") {
+        throw customErrors.internalServerError();
+    }
     if (!bcrypt.compareSync(password, player.password)) {
         throw customErrors.unauthorized("password");
     }

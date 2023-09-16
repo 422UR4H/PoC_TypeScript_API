@@ -5,7 +5,8 @@ import { Dayjs } from "dayjs";
 export function create(player: CreatePlayer) {
     const { nick, name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query<Number>(`
-        INSERT INTO players (nick, name, email, password, description, "avatarUrl", birthday)
+        INSERT INTO players
+            (nick, name, email, password, description, "avatarUrl", birthday)
         VALUES ($1, $2, $3, $4, $5, $6, $7)
         ON CONFLICT DO NOTHING
         RETURNING id;`,
