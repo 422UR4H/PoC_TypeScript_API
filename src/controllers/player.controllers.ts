@@ -24,7 +24,7 @@ export async function update(req: Request, res: Response): Promise<void> {
     res.send(updatedPlayer);
 }
 
-export async function deleteById(req: Request, res: Response): Promise<void> {
+export async function deleteById(_req: Request, res: Response): Promise<void> {
     const { id } = res.locals.user;
     const result = await playerService.deleteById(id);
     if (result.rowCount <= 0) throw customErrors.notFound("player");
@@ -32,7 +32,7 @@ export async function deleteById(req: Request, res: Response): Promise<void> {
     res.send(result.rows[0]);
 }
 
-export async function count(req: Request, res: Response): Promise<void> {
+export async function count(_req: Request, res: Response): Promise<void> {
     const result = await playerService.count();
     res.send(result.rows[0]);
 }

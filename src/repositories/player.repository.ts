@@ -1,5 +1,5 @@
-import { clientDB } from "@/database/db.connection";
 import { Player, CreatePlayer, UpdatePlayer } from "@/protocols/player.protocols";
+import { clientDB } from "@/database/db.connection";
 import { Dayjs } from "dayjs";
 
 const LIMIT = 8;

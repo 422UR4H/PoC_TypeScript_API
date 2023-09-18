@@ -1,7 +1,5 @@
 import { UpdatePlayer } from "@/protocols/player.protocols";
 import playerRepository from "@/repositories/player.repository";
-import customErrors from "@/errors/customErrors";
-import bcrypt from "bcrypt";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
