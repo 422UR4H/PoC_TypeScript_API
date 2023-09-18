@@ -18,7 +18,7 @@ export default function validateAuth(req: Request, res: Response, next: NextFunc
             if (error) return res.status(httpStatus.UNAUTHORIZED).send("token is not valid");
 
             const user = (await playerRepository.readById(decoded.id))?.rows[0];
-            if (!user) return res.status(httpStatus.NOT_FOUND).send("player does not exist");
+            if (!user) return res.status(httpStatus.UNAUTHORIZED).send("player does not exist");
 
             delete user.password;
             res.locals.user = user;
