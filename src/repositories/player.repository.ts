@@ -48,7 +48,7 @@ export function update(id: number, player: UpdatePlayer, updatedAt: Dayjs) {
     const { name, description, avatarUrl, birthday } = player;
     return clientDB.query<Player>(`
         UPDATE players
-            SET name = $2
+            SET name = $2,
                 description = $3,
                 "avatarUrl" = $4,
                 birthday = $5,
