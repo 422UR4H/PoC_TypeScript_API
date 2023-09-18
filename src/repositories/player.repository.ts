@@ -16,11 +16,11 @@ export function create(player: CreatePlayer) {
     );
 }
 
-export function readByMail(mail: string) {
+export function readByEmail(email: string) {
     return clientDB.query<Player>(`
         SELECT * FROM players
-        WHERE mail = $1;`,
-        [mail]
+        WHERE email = $1;`,
+        [email]
     );
 }
 
@@ -28,7 +28,8 @@ export function find(nick: string, email: string) {
     return clientDB.query<Player>(`
         SELECT nick, email
         FROM players
-        WHERE nick ILIKE $1 OR email ILIKE $2
+        WHERE nick ILIKE COALESCE($1, nick)
+            OR email ILIKE COALESCE($2, email)
         ORDER BY nick, email
         LIMIT $3;`,
         [`%${nick}%`, `%${email}%`, LIMIT]
@@ -70,7 +71,7 @@ export function deleteById(id: number) {
 }
 
 const playerRepository = {
-    create, readById, readByMail, find,
+    create, readById, readByEmail, find,
     update, deleteById
 };
 export default playerRepository;
