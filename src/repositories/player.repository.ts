@@ -44,20 +44,18 @@ export function readById(id: number) {
     );
 }
 
-export function update(id: number, player: UpdatePlayer, updatedAd: Dayjs) {
-    const { name, email, password, description, avatarUrl, birthday } = player;
+export function update(id: number, player: UpdatePlayer, updatedAt: Dayjs) {
+    const { name, description, avatarUrl, birthday } = player;
     return clientDB.query<Player>(`
         UPDATE players
-            SET name = $2,
-                email = $3,
-                password = $4,
-                description = $5,
-                "avatarUrl" = $6,
-                birthday = $7,
-                "updatedAt" = $8
+            SET name = $2
+                description = $3,
+                "avatarUrl" = $4,
+                birthday = $5,
+                "updatedAt" = $6
         WHERE id = $1
         RETURNING *;`,
-        [id, name, email, password, description, avatarUrl, birthday, updatedAd]
+        [id, name, description, avatarUrl, birthday, updatedAt]
     );
 }
 

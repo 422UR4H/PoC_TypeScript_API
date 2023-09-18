@@ -12,14 +12,7 @@ export function find(nick: string, mail: string) {
 }
 
 export function update(id: number, player: UpdatePlayer) {
-    const { password, birthday } = player;
-    if (typeof password !== "string") {
-        throw customErrors.unprocessableEntity("password");
-    }
-    const hash = bcrypt.hashSync(password, 10);
-    player.password = hash;
-    player.birthday = dayjs(birthday, "DD-MM-YYYY");
-
+    player.birthday = dayjs(player.birthday, "DD-MM-YYYY");
     return playerRepository.update(id, player, dayjs());
 }
 

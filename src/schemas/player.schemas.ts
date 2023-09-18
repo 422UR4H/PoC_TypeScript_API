@@ -16,8 +16,6 @@ export const playerSchema = Joi.object<CreatePlayer>({
 
 export const updatePlayerSchema = Joi.object<UpdatePlayer>({
     name: Joi.string().min(4).max(32).required(),
-    email: Joi.string().email().min(9).max(64).required(),
-    password: Joi.string().max(255).required(),
     description: Joi.string().max(255),
     avatarUrl: Joi.string().uri(),
     birthday: Joi.date().format('DD-MM-YYYY').less('now').required()

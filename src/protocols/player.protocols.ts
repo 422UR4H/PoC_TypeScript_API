@@ -1,4 +1,5 @@
 import { Dayjs } from "dayjs";
+import { AuthSymbol } from "./auth.protocols";
 
 export type Player = {
     id: number,
@@ -15,4 +16,4 @@ export type Player = {
 
 type SystemProperties = "id" | "createdAt" | "updatedAt";
 export type CreatePlayer = Omit<Player, SystemProperties>;
-export type UpdatePlayer = Omit<Player, SystemProperties | "nick">;
+export type UpdatePlayer = Omit<Player, SystemProperties | AuthSymbol | "nick">;
