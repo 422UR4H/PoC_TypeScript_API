@@ -18,7 +18,10 @@ export async function update(req: Request, res: Response): Promise<void> {
     const result = await playerService.update(id, player);
     if (result.rowCount <= 0) throw customErrors.conflict("nick or email");
 
-    res.send(result.rows[0]);
+    const updatedPlayer = result.rows[0];
+    delete updatedPlayer.password;
+
+    res.send(updatedPlayer);
 }
 
 export async function deleteById(req: Request, res: Response): Promise<void> {
