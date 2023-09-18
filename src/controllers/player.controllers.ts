@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Player, UpdatePlayer } from "@/protocols/player.protocols";
+import { UpdatePlayer } from "@/protocols/player.protocols";
 import playerService from "@/services/player.services";
 import customErrors from "@/errors/customErrors";
 
@@ -29,7 +29,12 @@ export async function deleteById(req: Request, res: Response): Promise<void> {
     res.send(result.rows[0]);
 }
 
+export async function count(req: Request, res: Response): Promise<void> {
+    const result = await playerService.count();
+    res.send(result.rows[0]);
+}
+
 const playerController = {
-    update, deleteById, find
+    update, deleteById, find, count
 }
 export default playerController;

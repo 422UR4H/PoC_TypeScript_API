@@ -2,10 +2,11 @@ import { Router } from "express";
 import validateAuth from "@/middlewares/validateAuth";
 import validateSchema from "@/middlewares/validateSchema";
 import { updatePlayerSchema } from "@/schemas/player.schemas";
-import { update, deleteById, find } from "@/controllers/player.controllers";
+import { update, deleteById, find, count } from "@/controllers/player.controllers";
 
 const router = Router();
 
+router.get("/api/players-count", count);
 router.get("/api/find-players-by", validateAuth, find);
 router.put("/api/players", validateAuth, validateSchema(updatePlayerSchema), update);
 router.delete("/api/players", validateAuth, deleteById);

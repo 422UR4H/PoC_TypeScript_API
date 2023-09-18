@@ -27,7 +27,11 @@ export function deleteById(id: number) {
     return playerRepository.deleteById(id);
 }
 
+export function count() {
+    return playerRepository.count();
+}
+
 const playerService = {
-    update, deleteById, find
+    update, deleteById, find, count
 }
 export default playerService;

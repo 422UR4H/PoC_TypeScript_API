@@ -70,8 +70,14 @@ export function deleteById(id: number) {
     );
 }
 
+export function count() {
+    return clientDB.query<Number>(`
+        SELECT COUNT(*) FROM players;
+    `);
+}
+
 const playerRepository = {
     create, readById, readByEmail, find,
-    update, deleteById
+    update, deleteById, count
 };
 export default playerRepository;
