@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
-import { UpdatePlayer } from "@/protocols/player.protocols";
+import { Player, UpdatePlayer } from "@/protocols/player.protocols";
 import playerService from "@/services/player.services";
 import customErrors from "@/errors/customErrors";
+
+export async function find(req: Request, res: Response): Promise<void> {
+    const nick = req.query.nick as string;
+    const email = req.query.email as string;
+    const result = await playerService.find(nick, email);
+    res.send(result.rows);
+}
 
 export async function update(req: Request, res: Response): Promise<void> {
     const { id } = res.locals.user;
@@ -23,6 +30,6 @@ export async function deleteById(req: Request, res: Response): Promise<void> {
 }
 
 const playerController = {
-    update, deleteById
+    update, deleteById, find
 }
 export default playerController;

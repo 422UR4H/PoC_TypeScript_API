@@ -2,6 +2,8 @@ import { clientDB } from "@/database/db.connection";
 import { Player, CreatePlayer, UpdatePlayer } from "@/protocols/player.protocols";
 import { Dayjs } from "dayjs";
 
+const LIMIT = 8;
+
 export function create(player: CreatePlayer) {
     const { nick, name, email, password, description, avatarUrl, birthday } = player;
     return clientDB.query<Number>(`
@@ -14,19 +16,22 @@ export function create(player: CreatePlayer) {
     );
 }
 
-export function readByEmail(email: string) {
+export function readByMail(mail: string) {
     return clientDB.query<Player>(`
         SELECT * FROM players
-        WHERE email = $1;`,
-        [email]
+        WHERE mail = $1;`,
+        [mail]
     );
 }
 
-export function readByNick(nick: string) {
+export function find(nick: string, email: string) {
     return clientDB.query<Player>(`
-        SELECT * FROM players
-        WHERE nick = $1;`,
-        [nick]
+        SELECT nick, email
+        FROM players
+        WHERE nick ILIKE $1 OR email ILIKE $2
+        ORDER BY nick, email
+        LIMIT $3;`,
+        [`%${nick}%`, `%${email}%`, LIMIT]
     );
 }
 
@@ -65,8 +70,7 @@ export function deleteById(id: number) {
 }
 
 const playerRepository = {
-    create, readByEmail,
-    readByNick, readById,
+    create, readById, readByMail, find,
     update, deleteById
 };
 export default playerRepository;

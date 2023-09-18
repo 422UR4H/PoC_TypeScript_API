@@ -21,7 +21,7 @@ export function signUp(player: CreatePlayer): Promise<any> {
 }
 
 export async function signIn(email: string, password: string): Promise<any> {
-    const result = await playerRepository.readByEmail(email);
+    const result = await playerRepository.readByMail(email);
     if (result.rowCount <= 0) throw customErrors.notFound("email");
 
     const player = result.rows[0];

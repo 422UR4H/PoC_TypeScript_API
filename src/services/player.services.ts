@@ -7,6 +7,10 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 
 dayjs.extend(customParseFormat);
 
+export function find(nick: string, mail: string) {
+    return playerRepository.find(nick, mail);
+}
+
 export function update(id: number, player: UpdatePlayer) {
     const { password, birthday } = player;
     if (typeof password !== "string") {
@@ -24,6 +28,6 @@ export function deleteById(id: number) {
 }
 
 const playerService = {
-    update, deleteById
+    update, deleteById, find
 }
 export default playerService;
