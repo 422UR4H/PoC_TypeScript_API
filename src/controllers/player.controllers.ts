@@ -29,7 +29,10 @@ export async function deleteById(_req: Request, res: Response): Promise<void> {
     const result = await playerService.deleteById(id);
     if (result.rowCount <= 0) throw customErrors.notFound("player");
 
-    res.send(result.rows[0]);
+    const deletedPlayer = result.rows[0];
+    delete deletedPlayer.password;
+
+    res.send(deletedPlayer);
 }
 
 export async function count(_req: Request, res: Response): Promise<void> {
