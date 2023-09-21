@@ -4,7 +4,7 @@ import playerRouter from "@/routers/player.routes";
 
 const router = Router();
 router
-    .use(authRouter)
-    .use(playerRouter);
+    .use("/auth", authRouter)
+    .use("/players", playerRouter);
 
 export default router;

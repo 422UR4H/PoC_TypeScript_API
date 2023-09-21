@@ -5,10 +5,10 @@ import { updatePlayerSchema } from "@/schemas/player.schemas";
 import { update, deleteById, find, count } from "@/controllers/player.controllers";
 
 const router = Router();
-
-router.get("/api/players-count", count);
-router.get("/api/find-players-by", validateAuth, find);
-router.put("/api/players", validateAuth, validateSchema(updatePlayerSchema), update);
-router.delete("/api/players", validateAuth, deleteById);
+router
+    .get("/count", count)
+    .get("/find-by", validateAuth, find)
+    .patch("/", validateAuth, validateSchema(updatePlayerSchema), update)
+    .delete("/", validateAuth, deleteById);
 
 export default router;
